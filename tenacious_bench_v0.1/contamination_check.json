@@ -1,0 +1,42 @@
+{
+  "dataset": "tenacious_bench_v0.1",
+  "version": "0.1-interim",
+  "status": "interim_check_completed",
+  "checks": {
+    "ngram_overlap": {
+      "method": "Manual and script-ready review of task inputs across train/dev/held_out partitions",
+      "threshold": "No held-out task should share 8-gram input overlap with train tasks",
+      "result": "pass_interim",
+      "notes": "Held-out tasks use distinct prospect scenarios and phrasing from train/dev starter tasks."
+    },
+    "embedding_similarity": {
+      "method": "Planned embedding check using cosine similarity",
+      "threshold": "Held-out vs train similarity below 0.85",
+      "result": "pending_full_automation",
+      "notes": "Interim dataset is small; full embedding check will be automated for the 200-300 task version."
+    },
+    "time_shift_verification": {
+      "method": "Manual review of public-signal references",
+      "threshold": "Any public-data reference must include a documented signal window",
+      "result": "pass_interim",
+      "notes": "Current interim tasks are synthetic and seed-derived; no live public-data time-shift dependency is present."
+    },
+    "generator_judge_separation": {
+      "method": "Documented methodology constraint",
+      "threshold": "Do not use the same model family to generate and judge the same task",
+      "result": "planned",
+      "notes": "The interim evaluator is deterministic/rule-based, so model-family leakage is not yet present."
+    }
+  },
+  "summary": {
+    "train_tasks": 10,
+    "dev_tasks": 5,
+    "held_out_tasks": 4,
+    "known_limitations": [
+      "Small interim dataset size",
+      "Embedding similarity check not automated yet",
+      "Held-out is not yet cryptographically sealed",
+      "Full multi-LLM generation logs not yet populated"
+    ]
+  }
+}
