@@ -1,0 +1,4 @@
+timestamp,bucket,tool_or_model,purpose,cost_usd,notes
+2026-04-29,dataset_authoring,manual,Initial task authoring,0.00,Manual interim dataset construction
+2026-04-29,evaluation,local_python,Scoring evaluator testing,0.00,Rule-based evaluator
+2026-04-29,documentation,manual,Datasheet and methodology writing,0.00,No API cost
