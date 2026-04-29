@@ -1,0 +1,26 @@
+{
+  "task_id": "string",
+  "source_mode": "trace-derived | programmatic | multi-LLM | adversarial",
+  "segment": "series_b_startup | mid_market_restructure | new_cto_transition | specialized_capability | objection_heavy",
+  "difficulty": "easy | medium | hard",
+  "input": {
+    "prospect_context": "string",
+    "signal_brief": "string",
+    "bench_context": "string",
+    "prior_thread": "string"
+  },
+  "candidate_output": "string",
+  "ground_truth": {
+    "required_signal_reference": "string",
+    "required_next_step": "string",
+    "forbidden_claims": ["string"],
+    "tone_markers": ["specific", "honest", "low-hype", "qualification-first"]
+  },
+  "scoring": {
+    "signal_grounding": 0,
+    "tone_adherence": 0,
+    "actionability": 0,
+    "constraint_safety": 0,
+    "overall": 0
+  }
+}
