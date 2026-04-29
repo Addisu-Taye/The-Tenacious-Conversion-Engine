@@ -1,0 +1,19 @@
+# Audit Memo: Why Tenacious-Bench Is Needed
+
+Existing agent benchmarks such as τ²-Bench are useful for evaluating generic tool use, sequential reasoning, and task completion. However, they do not measure the specific behaviors required for the Tenacious Conversion Engine. Week 10 showed that the system can send emails, receive SMS, update HubSpot, trace workflows in Langfuse, and support booking through Cal.com. The remaining challenge is not infrastructure. The challenge is evaluating whether the agent behaves like a credible Tenacious sales operator.
+
+The first missing dimension is signal grounding. Tenacious outreach must be grounded in a concrete business signal such as hiring velocity, layoffs, leadership change, capability gaps, or AI maturity. A generic benchmark may reward fluent completion, but in this domain an output that fails to mention the provided signal is commercially weak. For example, if a prospect has three Python roles open for 60 days, the agent should reference that signal directly before suggesting a squad or scoping call. Generic language such as “we help companies scale” should not receive full credit.
+
+The second missing dimension is Tenacious tone adherence. The seed transcripts show a consistent style: direct, specific, low-hype, and qualification-first. The agent should not exaggerate savings, claim guaranteed outcomes, or describe Tenacious as “the best offshore team.” The correct style is to acknowledge uncertainty, ask qualifying questions, and offer a concrete next step. Existing benchmarks do not penalize overconfident or generic sales language strongly enough.
+
+The third missing dimension is objection handling. Tenacious prospects often raise objections about offshore delivery, engineer rotation, pricing, timezone overlap, and whether Tenacious replaces in-house architecture. These objections require precise responses. The agent should acknowledge the concern, name the relevant Tenacious mechanism, and avoid overpromising. For example, when a buyer worries about offshore quality, the response should discuss named-engineer stability and direct technical collaboration, not vague differentiation.
+
+The fourth missing dimension is conversion actionability. A response is not successful merely because it is polite or informative. It should move the conversation toward a specific next step, such as a scoping call, technical walkthrough, security review, or Cal.com booking link. τ²-Bench-style task completion does not directly measure this sales conversion objective.
+
+The fifth missing dimension is constraint safety. Tenacious outputs must avoid unsafe commercial claims: guaranteed savings, guaranteed delivery, unsupported pricing claims, or promises to replace a client’s internal team. These constraints are business-critical because overclaiming damages trust and creates delivery risk.
+
+Tenacious-Bench v0.1 addresses these gaps by evaluating four core scoring dimensions: signal grounding, tone adherence, actionability, and constraint safety. Each task contains structured prospect context, a signal brief, a candidate output, and explicit ground-truth fields such as required signal reference, required next step, and forbidden claims. This makes the benchmark machine-verifiable while still aligned with real sales behavior.
+
+The benchmark is constructed from four sources: trace-derived examples from Week 10, programmatic task variants, multi-LLM synthesis patterns, and hand-authored adversarial cases. The seed discovery-call transcripts provide the behavioral source of truth for tone, objection handling, and segment-specific logic.
+
+In summary, τ²-Bench evaluates whether an agent can complete tasks. Tenacious-Bench evaluates whether an agent can produce commercially useful, grounded, safe, and conversion-oriented sales behavior. That gap justifies building a custom benchmark for Week 11.
