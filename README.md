@@ -15,51 +15,50 @@ Tenacious-Bench v0.1 is a **domain-specific evaluation benchmark** designed to m
 ---
 
 ## 🧠 Motivation
-While Week 10 demonstrated a working multi-channel system (Email, SMS, CRM, Booking), evaluation revealed critical performance gaps:
+While Week 10 demonstrated a working multi-channel system, evaluation revealed critical performance gaps:
 1.  **Ungrounded Outputs:** Messages lacked specific signal references.
 2.  **Generic Tone:** "Salesy" language drifted into high-hype territory.
 3.  **Lack of Intent:** Responses often missed clear conversion actions.
 
-**Tenacious-Bench** was built to codify these requirements into a measurable framework.
-
 ---
 
 ## 🏗️ Project Structure
-.
-├── audit_memo.md                 # Gap analysis vs τ²-Bench
-├── methodology.md                # Benchmark design + path selection
-├── schema.json                   # Task schema definition
-├── scoring_evaluator.py          # Automatic scoring system
-├── datasheet.md                  # Dataset documentation
-├── inter_rater_agreement.md      # Agreement plan (interim)
-├── cost_log.csv                  # Cost tracking
-├── tenacious_bench_v0.1/
-│   ├── train/train.jsonl         # Training partition
-│   ├── dev/dev.jsonl             # Validation partition
-│   ├── held_out/held_out.jsonl   # Sealed evaluation partition
-│   └── contamination_check.json  # Leakage prevention report
-├── generation_scripts/
-│   ├── generate_tasks.py         # Task generation scaffold
-│   ├── judge_filter.py           # Quality filter
-│   └── dedupe_check.py           # Overlap detection
-├── synthesis_memos/
-│   ├── synthetic_data_memo.md
-│   ├── datasheets_data_cards_memo.md
-│   └── llm_as_judge_memo.md
-├── seed/
-│   └── transcripts/              # Discovery-call seed corpus (5 files)
-└── week10_artifacts/             # Prior system outputs
+
+* **Root Directory**
+    * `audit_memo.md`: Gap analysis vs τ²-Bench
+    * `methodology.md`: Benchmark design + path selection
+    * `schema.json`: Task schema definition
+    * `scoring_evaluator.py`: Automatic scoring system
+    * `datasheet.md`: Dataset documentation
+    * `inter_rater_agreement.md`: Agreement plan (interim)
+    * `cost_log.csv`: Cost tracking
+* **tenacious_bench_v0.1/** (Benchmark Data)
+    * `train/train.jsonl`: Training partition
+    * `dev/dev.jsonl`: Validation partition
+    * `held_out/held_out.jsonl`: Sealed evaluation partition
+    * `contamination_check.json`: Leakage prevention report
+* **generation_scripts/** (Tooling)
+    * `generate_tasks.py`: Task generation scaffold
+    * `judge_filter.py`: Quality filter
+    * `dedupe_check.py`: Overlap detection
+* **synthesis_memos/** (Research & Documentation)
+    * `synthetic_data_memo.md`
+    * `datasheets_data_cards_memo.md`
+    * `llm_as_judge_memo.md`
+* **seed/** (Input Sources)
+    * `transcripts/`: Discovery-call seed corpus
+* **week10_artifacts/** (Prior system logs/outputs)
 
 ---
 
 ## 📊 Dataset Design
 
 ### Segments Covered
-* **Series B Startups:** High-growth agility.
-* **Mid-market Restructure:** Complex organizational change.
-* **New CTO Transition:** Specific persona-based outreach.
-* **Specialized Capability Gaps:** Technical solution matching.
-* **Objection-Heavy Scenarios:** Resistance-focused stress testing.
+* Series B Startups (High growth)
+* Mid-market Restructure
+* New CTO Transition
+* Specialized Capability Gaps
+* Objection-Heavy Scenarios
 
 ### Task Schema (Simplified)
 {
@@ -79,53 +78,34 @@ The evaluator analyzes each candidate output across four primary dimensions:
 
 | Dimension | Description |
 | :--- | :--- |
-| Signal Grounding | References real, verified signals from the input. |
-| Tone Adherence | Strictly avoids generic "hype" language. |
-| Actionability | Includes a clear, logical next step for the lead. |
-| Constraint Safety | Successfully avoids all "forbidden claims." |
+| **Signal Grounding** | References real, verified signals from the input. |
+| **Tone Adherence** | Strictly avoids generic "hype" language. |
+| **Actionability** | Includes a clear, logical next step for the lead. |
+| **Constraint Safety** | Successfully avoids all "forbidden claims." |
 
-**Run Evaluator:**
-python scoring_evaluator.py tenacious_bench_v0.1/dev/dev.jsonl
+**Run Evaluator:** `python scoring_evaluator.py tenacious_bench_v0.1/dev/dev.jsonl`
 
 ---
 
 ## 🧪 Dataset Partitions & Anti-Contamination
-* **Train:** Used for model development and fine-tuning.
-* **Dev:** Used for validation and iterative testing.
-* **Held-out:** Sealed partition for final, unbiased evaluation.
-
-### Contamination Prevention
-To ensure integrity, the following checks are implemented:
-* N-gram overlap reviews.
-* Planned embedding similarity checks.
-* Physical separation of the held-out partition.
-* Deterministic scoring to prevent judge leakage.
+* **Train/Dev:** Used for development and iterative validation.
+* **Held-out:** Sealed partition for final evaluation.
+* **Prevention:** N-gram overlap reviews and deterministic scoring to prevent leakage.
 
 ---
 
 ## 📚 Methodology
 **Selected Path: Path B — Preference-tuned Judge / Critic**
-
-* **Rationale:** The Week 10 system is functionally sound; the primary bottleneck is output inconsistency. Implementing a judge model improves reliability and "sanity checks" messages before they reach the customer.
-* **Seed Data:** Grounded in synthetic discovery-call transcripts, Week 10 trace logs, failure taxonomies, and enrichment outputs.
+* **Rationale:** Output inconsistency is the primary bottleneck. A judge model improves reliability before messages reach the customer.
+* **Seed Data:** Grounded in synthetic discovery-call transcripts and failure taxonomies.
 
 ---
 
 ## ⚠️ Known Limitations & Next Steps
-
-### Current Limitations
-* Dataset size is currently a "starter" version.
-* Inter-rater agreement (IRA) metrics are still being computed.
-* LLM-as-a-Judge integration is in the prototyping phase.
-
-### Roadmap to Final Submission
-1.  **Scale:** Expand dataset to 200–300 high-quality tasks.
-2.  **Train:** Implement judge model training via LoRA.
-3.  **Validate:** Compute confidence intervals and publish to HuggingFace.
-4.  **Ablate:** Run experiments to determine the impact of different prompts.
+* **Current Limitations:** Starter dataset size; IRA metrics pending; LLM-judge in prototype.
+* **Roadmap:** Expand to 200–300 tasks, train judge model (LoRA), and publish to HuggingFace.
 
 ---
 
 **Status:** ✔ Audit | ✔ Schema | ✔ Evaluator | ✔ Dataset Initialized | ✔ Docs
-
 **Author:** Addisu Taye | **TRP1 — Week 11**
