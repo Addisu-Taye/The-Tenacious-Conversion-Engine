@@ -1,0 +1,9 @@
+
+# Large model artifacts
+training/tenacious_judge_lora/
+tenacious_judge_lora.zip
+*.safetensors
+optimizer.pt
+scheduler.pt
+rng_state.pth
+scaler.pt
