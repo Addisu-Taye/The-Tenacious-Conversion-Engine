@@ -1,0 +1,19 @@
+Training path: Path B — judge/critic
+Base model: Qwen/Qwen2.5-0.5B-Instruct
+Training method: LoRA supervised judge-selection training
+Preference data: training_data/judge_preferences.jsonl
+Train size: 108
+Eval size: 12
+Epochs: 2
+Trainable parameters: 8,798,208
+Total parameters: 502,830,976
+Trainable percentage: 1.7497%
+
+Results:
+Epoch 1 training loss: 1.890827
+Epoch 1 validation loss: 0.719504
+Epoch 2 training loss: 0.356951
+Epoch 2 validation loss: 0.292725
+
+Notes:
+Unsloth installation failed due to xformers wheel build issues, so training used standard HuggingFace Transformers + PEFT LoRA. The training objective remained Path B: judge/critic preference learning.

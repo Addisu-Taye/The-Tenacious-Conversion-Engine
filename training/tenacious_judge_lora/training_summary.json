@@ -1,0 +1,13 @@
+{
+  "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "training_path": "Path B - judge_or_critic",
+  "training_method": "LoRA supervised judge selection",
+  "dataset": "judge_preferences.jsonl",
+  "train_size": 108,
+  "eval_size": 12,
+  "epochs": 2,
+  "learning_rate": 0.0002,
+  "lora_r": 16,
+  "lora_alpha": 16,
+  "max_length": 1024
+}
