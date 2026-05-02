@@ -1,4 +1,4 @@
-# Audit Memo: Why Tenacious-Bench Is Needed
+# Audit Memo: Gap Analysis Grounded in Week 10 Evidence
 
 Existing agent benchmarks such as τ²-Bench are useful for evaluating generic tool use, sequential reasoning, and task completion. However, they do not measure the specific behaviors required for the Tenacious Conversion Engine. Week 10 showed that the system can send emails, receive SMS, update HubSpot, trace workflows in Langfuse, and support booking through Cal.com. The remaining challenge is not infrastructure. The challenge is evaluating whether the agent behaves like a credible Tenacious sales operator.
 
@@ -17,3 +17,14 @@ Tenacious-Bench v0.1 addresses these gaps by evaluating four core scoring dimens
 The benchmark is constructed from four sources: trace-derived examples from Week 10, programmatic task variants, multi-LLM synthesis patterns, and hand-authored adversarial cases. The seed discovery-call transcripts provide the behavioral source of truth for tone, objection handling, and segment-specific logic.
 
 In summary, τ²-Bench evaluates whether an agent can complete tasks. Tenacious-Bench evaluates whether an agent can produce commercially useful, grounded, safe, and conversion-oriented sales behavior. That gap justifies building a custom benchmark for Week 11.
+
+## Grounding in Week 10 Evidence
+
+The following observations are derived from Week 10 system traces:
+
+- Outputs frequently ignored provided signals
+- Responses contained generic sales language
+- Next-step actions were inconsistent
+- Objection handling was weak or missing
+
+These observations directly informed the Tenacious-Bench design.
