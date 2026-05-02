@@ -1,0 +1,39 @@
+{
+  "experiment": "Tenacious judge/critic LoRA ablation",
+  "path": "Path B - judge_or_critic",
+  "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "dataset": "Tenacious-Bench v0.1",
+  "training_data": "training_data/judge_preferences.jsonl",
+  "runs": [
+    {
+      "name": "baseline_rule_evaluator",
+      "description": "Rule-based evaluator on dev split before trained judge component.",
+      "mean_score": 0.62,
+      "ci_95": [0.58, 0.66],
+      "notes": "Computed from deterministic scoring evaluator."
+    },
+    {
+      "name": "trained_judge_adapter",
+      "description": "LoRA-trained judge/critic adapter trained on preference pairs.",
+      "validation_loss": 0.292725,
+      "train_loss": 0.356951,
+      "delta_observed": "Validation loss reduced from 0.719504 to 0.292725 across two epochs.",
+      "notes": "Used as evidence that the adapter learned the preference structure."
+    },
+    {
+      "name": "prompt_only_baseline",
+      "description": "Prompt-only judge without LoRA training.",
+      "status": "planned",
+      "notes": "Delta B comparison to be expanded in final publication."
+    }
+  ],
+  "cost": {
+    "training_compute": "Google Colab free tier",
+    "estimated_cost_usd": 0.0
+  },
+  "limitations": [
+    "Validation set is small.",
+    "Improvement measured primarily through validation loss rather than full production ablation.",
+    "Further held-out scoring is required before deployment."
+  ]
+}
