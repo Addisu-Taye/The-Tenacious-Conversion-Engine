@@ -231,12 +231,11 @@ Prompt-only approach:
 
 ---
 
-## 🤖 Model Artifacts
 
-⚠️ Large model files are not stored in GitHub.
+## Public Artifacts
 
-👉 Download trained adapter:
-`Google Drive / HuggingFace link (add here)`
+- Model Adapter: https://huggingface.co/AddisuT/tenacious-judge-lora
+- Dataset: https://huggingface.co/datasets/AddisuT/tenacious-bench-v1
 
 ---
 
